@@ -68,7 +68,7 @@ const authSlice = createSlice({
         register: (state, action) => {
             const { userId, password } = action.payload;
             const checkUser = state.usersData.find((user) => {
-                return user.customerId == userId && user.customerPin == password;
+                return user.customerId == userId;
             });
             if (checkUser) {
                 state.error = "User Already exists";
@@ -76,15 +76,15 @@ const authSlice = createSlice({
             } else {
                 const obj = {
                     customerId: userId,
-                    customerName: "null",
+                    customerName: "-",
                     customerPin: password,
-                    customerAccountType: "null",
-                    customerAccountNo: "null",
-                    customerAccountBalance: "null",
-                    customerAadhar: "null",
-                    customerPan: "null",
-                    customerContact: "null",
-                    customerEmail: "null",
+                    customerAccountType: "-",
+                    customerAccountNo: "-",
+                    customerAccountBalance: "-",
+                    customerAadhar: "-",
+                    customerPan: "-",
+                    customerContact: "-",
+                    customerEmail: "-",
                     status: "inactive",
                 };
                 state.error = null;
@@ -106,14 +106,19 @@ const authSlice = createSlice({
                 return user.customerId == customerId && user.customerPin == customerPin;
             });
             if (checkUser) {
-                state.error = null;
-                state.message = "Account activated successfully";
-                const updatedUsers = state.usersData.map((user) => {
-                    return user.customerId == customerId ? obj : user;
-                });
-                state.usersData = updatedUsers;
+                if (checkUser.status === "active") {
+                    state.error = "Account is already active";
+                }
+                else {
+                    state.error = null;
+                    state.message = "Account activated successfully";
+                    const updatedUsers = state.usersData.map((user) => {
+                        return user.customerId == customerId ? obj : user;
+                    });
+                    state.usersData = updatedUsers;
+                }
             } else {
-                state.error = "Account does not exists!";
+                state.error = "Account does not exists! (user ID or password is incorrect)";
                 state.message = "";
             }
         },

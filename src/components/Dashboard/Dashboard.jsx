@@ -18,7 +18,7 @@ export default function Dashboard() {
     <nav className='navbar navbar-primary bg-dark'>
       <div className='container-fluid'>
         <p className='navbar-brand mx-3 mx-lg-5 text-light'>
-          {isAuthenticated ? `Hello ${user}` : `Banking System`}
+          {isAuthenticated && user !=="-" ? `Hello ${user}` : `Banking System`}
         </p>
         <form className='d-flex'>
           <Link
