@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   clearError,
   logIn,
   register,
-  registerUser,
   transactionHistoryData,
 } from "../../features/authSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +17,7 @@ export default function LoginPage() {
   const [isLogin, setIsLogin] = useState(true);
   const [disableLogin, setDisableLogin] = useState(true);
   const dispatch = useDispatch();
-  const { error, isAdmin, usersData, message, isAuthenticated } = useSelector(
+  const { error, isAdmin, message, isAuthenticated } = useSelector(
     (state) => state.auth
   );
   const navigate = useNavigate();
@@ -43,6 +42,7 @@ export default function LoginPage() {
       ? setDisableLogin(false)
       : setDisableLogin(true);
   }, [login]);
+
   const handleTransactionData =  () => {
     try {
       const result = dispatch(transactionHistoryData(login.userId));
@@ -52,6 +52,7 @@ export default function LoginPage() {
       navigate("/error");
     }
   };
+
   useEffect(() => {
     isAuthenticated
       ? isAdmin
@@ -67,6 +68,7 @@ export default function LoginPage() {
     setLogin({ userId: "", password: "" });
     dispatch(clearError());
   };
+  
   return (
     <div
       style={{

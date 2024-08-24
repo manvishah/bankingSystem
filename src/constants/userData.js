@@ -140,27 +140,7 @@ export const users= [
         customerPan: 12345678,
         customerContact: 123456789,
         customerEmail: "ram@email.com",
-        status:"active",
-        customerTransactions: [
-            {
-                transactionId: 1543,
-                transactionDate: "13/02/2023",
-                transactionAmount: 5200,
-                transactionType: "MXN"
-            },
-            {
-                transactionId: 1231,
-                transactionDate: "13/02/2023",
-                transactionAmount: 3200,
-                transactionType: "USD"
-            },
-            {
-                transactionId: 1876,
-                transactionDate: "13/02/2023",
-                transactionAmount: 7800,
-                transactionType: "USD"
-            }
-        ]
+        status:"active"
     },
     {
         customerId: 121314,
